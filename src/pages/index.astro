@@ -1,11 +1,217 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import '../styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanzard Studio / Research - Gallery Gray</title>
+    <style>
+        body { word-spacing: -1px; } 
+        /* 强制背景色，防止失效 */
+        .custom-bg { background-color: #EAEAEA !important; }
+        /* 作品卡片 hover 效果 */
+        .work-card:hover .work-mask { opacity: 1; }
+        /* 论文条目hover时变成纯白，浮现出来 */
+        .paper-item:hover { background-color: #FFFFFF; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border-color: transparent; }
+    </style>
+</head>
+<body class="custom-bg text-[#111111] antialiased md:text-sm transition-colors duration-300">
+
+    <nav class="custom-bg sticky top-0 z-50 border-b border-gray-300/50">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-lg md:text-xl tracking-tighter hover:text-[#002FA7] transition-colors cursor-pointer">
+                <span class="font-bold">YOUR NAME</span> 
+                <span class="font-light text-gray-500 ml-1">Studio / Research</span>
+            </div>
+            
+            <div class="flex space-x-6 text-xs font-medium tracking-widest text-gray-500">
+                <a href="#projects" class="hover:text-[#002FA7] transition">PROJECTS</a>
+                <a href="#thoughts" class="hover:text-[#002FA7] transition">THOUGHTS</a>
+                <a href="#papers" class="hover:text-[#002FA7] transition">PAPERS</a>
+                <a href="#info" class="hover:text-[#002FA7] transition">INFO</a>
+            </div>
+        </div>
+    </nav>
+
+<header class="custom-bg border-b border-gray-300/50 relative">
+        <div class="max-w-[1600px] mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            
+            <div class="md:col-span-7">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter leading-none mb-6 text-[#111111]">
+                    CREATIVE <span class="text-[#002FA7]">DESIGNER</span> <span class="text-[#FF4500]">+</span><br>
+                    ACADEMIC <span class="border-b-4 border-[#002FA7] pb-1">RESEARCHER</span><span class="text-[#FF4500]">.</span>
+                </h1>
+                <p class="text-lg md:text-base text-gray-600 max-w-2xl font-light leading-relaxed">
+                    我致力于将直观的视觉设计与严谨的学术研究相结合。这里展示了我制作的<span class="font-medium text-[#111111]">视频</span>与<span class="font-medium text-[#111111]">海报</span>，我写的<span class="font-medium text-[#111111]">文字</span>，以及我发表的<span class="font-medium text-[#111111]">论文</span>。
+                </p>
+            </div>
+
+            <div class="md:col-span-5 lg:col-span-4 lg:col-start-9">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+                    
+                    <div class="absolute -top-3 -left-3 bg-[#FF4500] text-white text-[10px] font-mono px-3 py-1 rounded-sm shadow-sm rotate-[-3deg]">LATEST MOOD</div>
+                    
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                        <span class="text-xs text-gray-400 font-mono">2026.04.10 / Live Updates</span>
+                    </div>
+                    
+                    <p class="text-[#111111] text-sm leading-relaxed font-light italic">
+                        晚饭吃了太多碳水，晕碳中😴<br>
+                        以后我想发什么就发什么😋<br><br>
+                        欢迎来到我的私人厕所 💩 🚽<br>
+						Faze up！✋🏻
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-[1600px] mx-auto px-6 py-12 md:py-20 space-y-20 md:space-y-28">
+
+        <section id="projects">
+            <div class="flex items-center mb-10 space-x-3">
+                <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Selected Works</h2>
+                <div class="h-px flex-1 bg-gray-300"></div>
+                <div class="text-xs font-mono text-[#FF4500]">01</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm">
+                    <img src="/duck.jpg" alt="霸气大鸭子" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    
+                    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
+                        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / PET</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">霸气大鸭子鸭</h3>
+                    </div>
+                </div>
+<a href="https://www.bilibili.com/video/BV1fyDLBNEio/" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
+    
+    <img src="/karrigan.jpg" alt="视频封面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+    
+    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
+        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / MOTION</span>
+        
+        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">致敬古堡12枪</h3>
+        
+        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
+            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+            </svg>
+            <span>点击前往 Bilibili 观看高清版</span>
+        </div>
+    </div>
+</a>
+<a href="/paper1.pdf" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
+    
+    <img src="/cover.jpg" alt="论文封面" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+    
+    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
+        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / RESEARCH</span>
+        
+        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">Falcons战队随机波函数坍塌研究</h3>
+        
+        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
+            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <span>点击阅读 PDF 原文</span>
+        </div>
+    </div>
+</a>
+        </section>
+
+<section id="papers">
+            <div class="flex items-center mb-10 space-x-3">
+                <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Publications</h2>
+                <div class="h-px flex-1 bg-gray-300"></div>
+                <div class="text-xs font-mono text-[#FF4500]">02</div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-xl border border-gray-200/50 bg-white transition-all shadow-sm">
+                    
+                    <div class="w-full md:w-28 flex-shrink-0 mb-4 md:mb-0 md:mr-6 overflow-hidden rounded border border-gray-200">
+                        <img src="./cover.jpg" alt="论文封面" class="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105">
+                    </div>
+
+                    <div class="flex-1 pr-4">
+                        <h3 class="text-base md:text-lg font-bold text-[#111111] tracking-tight mb-2 leading-snug">
+                            《基于“尼尼孩孩没这冠军”现象的多模态多场景分析溯源》：Falcons战队随机波函数坍塌与电竞玄学研究
+                        </h3>
+                        <p class="text-sm text-gray-600 font-light mb-1">
+                            Nikola Kovač, Ilya Osipov, Quanzard 等.
+                        </p>
+                        <p class="text-xs text-gray-400 font-mono italic">
+                            SHIT Information Technology, 2026.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-200">
+                        <a href="./paper1.pdf" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">
+                            [PDF]
+                        </a>
+                        <a href="https://shitspace.xyz" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-gray-600 hover:bg-[#FF4500] hover:text-white transition-colors duration-300">
+                            [LINK]
+                        </a>
+                    </div>
+                </div>
+
+                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all opacity-50">
+                    <div class="flex-1 pr-8">
+                        <h3 class="text-base font-semibold text-[#111111] tracking-tight mb-1">Waiting for next abstract masterpiece...</h3>
+                        <p class="text-sm text-gray-500 font-light mt-1">
+                            Author. <span class="text-gray-800 font-medium">Journal of Cyber-Red-Face</span>, 2027.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+            <div class="flex items-center mb-10 space-x-3">
+                <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Publications</h2>
+                <div class="h-px flex-1 bg-gray-300"></div>
+                <div class="text-xs font-mono text-[#FF4500]">02</div>
+            </div>
+
+            <div class="space-y-2">
+                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all">
+                    <div class="flex-1 pr-8">
+                        <h3 class="text-base font-semibold text-ink tracking-tight mb-1">基于深度学习的图像特征提取研究</h3>
+                        <p class="text-sm text-gray-500 font-light mt-1">
+                            第一作者. <span class="text-gray-800 font-medium">IEEE TPAMI</span>, 2023.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-300">
+                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[PDF]</a>
+                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[DOI]</a>
+                    </div>
+                </div>
+
+                 <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all">
+                    <div class="flex-1 pr-8">
+                        <h3 class="text-base font-semibold text-ink tracking-tight mb-1">A New Approach to Computer Vision</h3>
+                        <p class="text-sm text-gray-500 font-light mt-1">
+                            Co-author. <span class="text-gray-800 font-medium">CVPR 2022</span>.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-300">
+                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[PDF]</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="custom-bg text-gray-500 mt-20 border-t border-gray-300/50">
+        <div class="max-w-[1600px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest">
+            &copy; 2026 YOUR NAME. BUILT WITH AI & AFFECTION.
+        </div>
+    </footer>
+
+</body>
+</html>
