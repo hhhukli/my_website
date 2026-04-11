@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+
+// 🚨 你的“赛博论文数据库” 🚨
+// 以后发新论文，只需要在最前面复制粘贴加一块这个括号就行，下面的 HTML 完全不用动！
+const papers = [
+    {
+        title: "《基于“尼尼孩孩没这冠军”现象的多模态多场景分析溯源》：Falcons战队随机波函数坍塌与电竞玄学研究",
+        author: "Nikola Kovač, Ilya Osipov, Quanzard 等.",
+        journal: "SHIT Information Technology, 2026.",
+        keywords: "尼尼孩孩, 软脚虾相变, 赛博红温学",
+        pdfLink: "./《基于“尼尼孩孩没这冠军”现象的多模态多场景分析溯源》：Falcons战队随机波函数坍塌与电竞玄学研究.pdf",
+        extraLink: ""
+    },
+    {
+        title: "《基于“上帝经济学”(Jame Time)的CS战术资源最优解：极低期望残局中的绝对保枪行为与心理战模型分析》",
+        author: "Quanzard.",
+        journal: "SHIT Information Technology, 2026.",
+        keywords: "Jame Time, 保枪阈值",
+        pdfLink: "./基于“上帝经济学”（Jame Time）的CS战术资源最优解：极低期望残局中的绝对保枪行为与心理战模型分析.pdf",
+        extraLink: "" // 如果没有额外链接就留空
+    },
+    {
+        title: "《基于QQ农场互动痕迹推测暗恋对象精力状态以缓解无意识内耗的实证研究》",
+        author: "Quanzard, 智利硝石.",
+        journal: "SHIT Information Technology, 2026.",
+        keywords: "异步交互, 赛博心理学",
+        pdfLink: "./基于QQ农场互动痕迹推测暗恋对象精力状态以缓解无意识内耗的实证研究.pdf",
+        extraLink: ""
+    },
+    {
+        title: "《绝地求生(PUBG)中“打野”与“落地钢枪”策略的精神放松度对比研究：基于双人对照组与传统战术FPS的横向评估》",
+        author: "Quanzard, 马叉虫.",
+        journal: "SHIT Information Technology, 2026.",
+        keywords: "赛博拾荒, 心流状态",
+        pdfLink: "./绝地求生（PUBG）中“打野”与“落地钢枪”策略的精神放松度对比研究：基于双人对照组与传统战术FPS的横向评估.pdf",
+        extraLink: ""
+    },
+    {
+        title: "《“康神开播了？”——电子竞技社区中“单方面和解”现象的社会学分析——以〈无畏契约〉头部主播互动为例》",
+        author: "Quanzard.",
+        journal: "SHIT Information Technology, 2026.",
+        keywords: "拟剧理论, 抽象文化",
+        pdfLink: "./“康神开播了？”——电子竞技社区中“单方面和解”现象的社会学分析——以《无畏契约》头部主播互动为例.pdf",
+        extraLink: ""
+    }
+];
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papers - QUANZARD Studio</title>
+    <style>
+        .custom-bg { background-color: #EAEAEA !important; }
+        .paper-item:hover { background-color: #FFFFFF; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border-color: transparent; }
+    </style>
+</head>
+<body class="custom-bg text-[#111111] antialiased md:text-sm transition-colors">
+
+    <nav class="p-6 md:p-10 max-w-[1000px] mx-auto flex items-center justify-between">
+        <a href="/" class="text-xs font-mono tracking-widest text-gray-500 hover:text-[#002FA7] transition-colors flex items-center group">
+            <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span> BACK TO HOME
+        </a>
+        <div class="text-xs font-bold tracking-widest text-[#FF4500]">QUANZARD.</div>
+    </nav>
+
+    <header class="pt-10 pb-16 max-w-[1000px] mx-auto px-6">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-[#111111]">
+            ALL <span class="text-[#002FA7]">PAPERS.</span>
+        </h1>
+        <p class="mt-4 text-gray-500 font-light max-w-xl">
+            严谨的学术探索与赛博行为艺术的终极碰撞。点击 [PDF] 获取原汁原味的学术缝合大作。
+        </p>
+    </header>
+
+    <main class="max-w-[1000px] mx-auto px-6 pb-24 space-y-4">
+        
+        {papers.map((paper) => (
+            <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 rounded-xl border border-gray-200/50 bg-white transition-all shadow-sm">
+                <div class="flex-1 pr-4">
+                    <h3 class="text-lg md:text-xl font-bold text-[#111111] tracking-tight mb-2 leading-snug">
+                        {paper.title}
+                    </h3>
+                    <p class="text-sm text-gray-600 font-light mb-1">{paper.author}</p>
+                    <p class="text-xs text-gray-400 font-mono italic">{paper.journal} Keywords: {paper.keywords}</p>
+                </div>
+                <div class="flex items-center space-x-4 mt-6 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-200">
+                    <a href={paper.pdfLink} target="_blank" class="px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">[PDF]</a>
+                    {paper.extraLink && (
+                        <a href={paper.extraLink} target="_blank" class="px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#FF4500] hover:text-white transition-colors duration-300">[LINK]</a>
+                    )}
+                </div>
+            </div>
+        ))}
+
+    </main>
+
+    <footer class="border-t border-gray-300/50">
+        <div class="max-w-[1000px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest text-gray-500">
+            &copy; 2026 QUANZARD. BUILT WITH AI & AFFECTION.
+        </div>
+    </footer>
+</body>
+</html>

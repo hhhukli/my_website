@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+
+// 🚨 你的“赛博画廊数据库” 🚨
+// 以后加新图片，直接复制大括号 { ... } 往下加就行！
+const pictures = [
+    {
+        title: "雪影娃娃",
+        date: "2026 / PORTRAIT",
+        imgSrc: "./beauty.jpg"
+    },
+    {
+        title: "Lady嘎嘎",
+        date: "2026 / NATURE",
+        imgSrc: "./swan.jpg"
+    },
+    {
+        title: "鸭吉吉国王",
+        date: "2026 / PET",
+        imgSrc: "./duck.jpg"
+    },
+    {
+        title: "伊芙利特",
+        date: "2026 / PET",
+        imgSrc: "./cat.jpg"
+    },
+    {
+        title: "哈梅内伊",
+        date: "2026 / NATURE",
+        imgSrc: "./horse.jpg"
+    },
+    {
+        title: "审判天使",
+        date: "2026 / MACRO",
+        imgSrc: "./bug.jpg"
+    }
+];
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictures - QUANZARD Studio</title>
+    <style>
+        .custom-bg { background-color: #EAEAEA !important; }
+    </style>
+</head>
+<body class="custom-bg text-[#111111] antialiased">
+
+    <nav class="p-6 md:p-10 max-w-[1400px] mx-auto flex items-center justify-between">
+        <a href="/" class="text-xs font-mono tracking-widest text-gray-500 hover:text-[#002FA7] transition-colors flex items-center group">
+            <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">&larr;</span> BACK TO HOME
+        </a>
+        <div class="text-xs font-bold tracking-widest text-[#FF4500]">QUANZARD.</div>
+    </nav>
+
+    <header class="pt-10 pb-12 max-w-[1400px] mx-auto px-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter text-[#111111]">
+            VISUAL <span class="text-[#FF4500]">GALLERY.</span>
+        </h1>
+        <p class="mt-4 text-sm text-gray-500 font-light max-w-xl">
+            视觉实验、摄影记录与赛博废土影像集。
+        </p>
+    </header>
+
+    <main class="max-w-[1400px] mx-auto px-6 pb-24 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        
+        {pictures.map((pic) => (
+            <div class="bg-white p-2.5 md:p-3 rounded-xl border border-gray-200/80 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group cursor-pointer flex flex-col">
+                <div class="overflow-hidden rounded-lg aspect-[4/5] relative bg-gray-100">
+                    <img src={pic.imgSrc} alt={pic.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div class="pt-3 pb-1 px-1 text-center md:text-left">
+                    <h3 class="text-sm font-bold text-[#111111] tracking-tight group-hover:text-[#002FA7] transition-colors line-clamp-1">{pic.title}</h3>
+                    <p class="text-[10px] text-gray-400 font-mono mt-1">{pic.date}</p>
+                </div>
+            </div>
+        ))}
+
+    </main>
+
+    <footer class="border-t border-gray-300/50">
+        <div class="max-w-[1400px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest text-gray-500">
+            &copy; 2026 QUANZARD. BUILT WITH AI & AFFECTION.
+        </div>
+    </footer>
+
+</body>
+</html>

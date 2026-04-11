@@ -10,11 +10,8 @@ import '../styles/global.css';
     <title>QUANZARD Studio / Research</title>
     <style>
         body { word-spacing: -1px; } 
-        /* 强制背景色，防止失效 */
         .custom-bg { background-color: #EAEAEA !important; }
-        /* 作品卡片 hover 效果 */
         .work-card:hover .work-mask { opacity: 1; }
-        /* 论文条目hover时变成纯白，浮现出来 */
         .paper-item:hover { background-color: #FFFFFF; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border-color: transparent; }
     </style>
 </head>
@@ -29,16 +26,15 @@ import '../styles/global.css';
             
             <div class="flex space-x-6 text-xs font-medium tracking-widest text-gray-500">
                 <a href="#projects" class="hover:text-[#002FA7] transition">PROJECTS</a>
-                <a href="#thoughts" class="hover:text-[#002FA7] transition">THOUGHTS</a>
                 <a href="#papers" class="hover:text-[#002FA7] transition">PAPERS</a>
-                <a href="#info" class="hover:text-[#002FA7] transition">INFO</a>
+                <a href="#pictures" class="hover:text-[#002FA7] transition">PICTURES</a>
+                <a href="#thoughts" class="hover:text-[#002FA7] transition">THOUGHTS</a>
             </div>
         </div>
     </nav>
 
-<header class="custom-bg border-b border-gray-300/50 relative">
+    <header class="custom-bg border-b border-gray-300/50 relative">
         <div class="max-w-[1600px] mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            
             <div class="md:col-span-7">
                 <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter leading-none mb-6 text-[#111111]">
                     CREATIVE <span class="text-[#002FA7]">DESIGNER</span> <span class="text-[#FF4500]">+</span><br>
@@ -46,36 +42,33 @@ import '../styles/global.css';
                 </h1>
                 <p class="text-lg md:text-base text-gray-600 max-w-2xl font-light leading-relaxed">
                     我致力于将直观的视觉设计与严谨的学术研究相结合。这里展示了我制作的<span class="font-medium text-[#111111]">视频</span>与<span class="font-medium text-[#111111]">海报</span>，我写的<span class="font-medium text-[#111111]">文字</span>，以及我发表的<span class="font-medium text-[#111111]">论文</span>。
+                <br>抖音：洛克萨斯之手  
+                B站：136只田猪  
+                小红书：Quanzard
+                等待发掘......
                 </p>
             </div>
 
             <div class="md:col-span-5 lg:col-span-4 lg:col-start-9">
                 <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col h-[220px]">
-                    
                     <div class="absolute -top-3 -left-3 bg-[#FF4500] text-white text-[10px] font-mono px-3 py-1 rounded-sm shadow-sm rotate-[-3deg] z-10">LATEST MOOD</div>
-                    
                     <div class="flex-1">
                         <div class="flex items-center space-x-2 mb-3">
                             <div id="mood-dot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse transition-colors duration-300"></div>
                             <span id="mood-date" class="text-xs text-gray-400 font-mono">2026.04.10 / Live Updates</span>
                         </div>
-                        
-                        <p id="mood-content" class="text-[#111111] text-sm leading-relaxed font-light italic transition-opacity duration-300 opacity-100">
-                            </p>
+                        <p id="mood-content" class="text-[#111111] text-sm leading-relaxed font-light italic transition-opacity duration-300 opacity-100"></p>
                     </div>
-
-                    <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
-                        <button id="btn-prev" class="text-gray-400 hover:text-[#FF4500] transition flex items-center space-x-1 text-[11px] font-mono tracking-wider focus:outline-none">
-                            <span>&larr; PREV DAY</span>
+                    <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-200">
+                        <button id="btn-prev" class="text-[#111111] hover:text-[#FF4500] transition flex items-center space-x-1 text-sm font-bold font-mono tracking-widest focus:outline-none group">
+                            <span class="text-lg transform group-hover:-translate-x-1 transition-transform">&larr;</span> <span>PREV DAY</span>
                         </button>
-                        <button id="btn-next" class="text-gray-400 hover:text-[#002FA7] transition flex items-center space-x-1 text-[11px] font-mono tracking-wider focus:outline-none">
-                            <span>NEXT DAY &rarr;</span>
+                        <button id="btn-next" class="text-[#111111] hover:text-[#002FA7] transition flex items-center space-x-1 text-sm font-bold font-mono tracking-widest focus:outline-none group">
+                            <span>NEXT DAY</span> <span class="text-lg transform group-hover:translate-x-1 transition-transform">&rarr;</span>
                         </button>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </header>
 
@@ -91,120 +84,156 @@ import '../styles/global.css';
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm">
                     <img src="./duck.jpg" alt="霸气大鸭子" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
-                    
                     <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
                         <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / PET</span>
                         <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">霸气大鸭子鸭</h3>
                     </div>
                 </div>
-<a href="https://www.bilibili.com/video/BV1fyDLBNEio/" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
-    
-    <img src="./karrigan.jpg" alt="视频封面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
-    
-    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
-        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / MOTION</span>
-        
-        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">致敬古堡12枪</h3>
-        
-        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
-            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-            </svg>
-            <span>点击前往 Bilibili 观看高清版</span>
-        </div>
-    </div>
-</a>
-<a href="./paper1.pdf" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
-    
-    <img src="./cover.jpg" alt="论文封面" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
-    
-    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
-        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / RESEARCH</span>
-        
-        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">Falcons战队随机波函数坍塌研究</h3>
-        
-        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
-            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-            <span>点击阅读 PDF 原文</span>
-        </div>
-    </div>
-</a>
+                <a href="https://www.bilibili.com/video/BV1fyDLBNEio/" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
+                    <img src="./karrigan.jpg" alt="视频封面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
+                        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / MOTION</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">致敬古堡12枪</h3>
+                        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
+                            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>点击前往 Bilibili 观看高清版</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="./paper1.pdf" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
+                    <img src="./cover.jpg" alt="论文封面" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
+                        <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / RESEARCH</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">Falcons战队随机波函数坍塌研究</h3>
+                        <div class="mt-4 flex items-center text-white/80 text-sm font-light">
+                            <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                            <span>点击阅读 PDF 原文</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </section>
 
-<section id="papers">
-            <div class="flex items-center mb-10 space-x-3">
-                <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Publications</h2>
-                <div class="h-px flex-1 bg-gray-300"></div>
-                <div class="text-xs font-mono text-[#FF4500]">02</div>
-            </div>
 
-            <div class="space-y-4">
-                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-xl border border-gray-200/50 bg-white transition-all shadow-sm">
-                    
-                    <div class="w-full md:w-28 flex-shrink-0 mb-4 md:mb-0 md:mr-6 overflow-hidden rounded border border-gray-200">
-                        <img src="./cover.jpg" alt="论文封面" class="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105">
-                    </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-20">
 
-                    <div class="flex-1 pr-4">
-                        <h3 class="text-base md:text-lg font-bold text-[#111111] tracking-tight mb-2 leading-snug">
-                            《基于“尼尼孩孩没这冠军”现象的多模态多场景分析溯源》：Falcons战队随机波函数坍塌与电竞玄学研究
+            <section id="papers" class="flex flex-col h-full">
+                <div class="flex items-center mb-8 space-x-3">
+                    <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Papers</h2>
+                    <div class="h-px flex-1 bg-gray-300"></div>
+                    <div class="text-xs font-mono text-[#FF4500]">02</div>
+                </div>
+<div class="space-y-4 flex-1">
+                    <div class="paper-item flex flex-col p-5 rounded-xl border border-gray-200/60 bg-white transition-all shadow-sm">
+                        <h3 class="text-sm md:text-base font-bold text-[#111111] tracking-tight mb-2 leading-snug">
+                            《基于“上帝经济学”(Jame Time)的CS战术资源最优解模型分析》
                         </h3>
-                        <p class="text-sm text-gray-600 font-light mb-1">
-                            Nikola Kovač, Ilya Osipov, Quanzard 等.
-                        </p>
-                        <p class="text-xs text-gray-400 font-mono italic">
-                            SHIT Information Technology, 2026.
-                        </p>
+                        <p class="text-xs text-gray-500 font-mono mb-3">SHIT Info Tech, 2026.</p>
+                        <div class="flex space-x-3">
+                            <a href="./基于“上帝经济学”（Jame Time）的CS战术资源最优解：极低期望残局中的绝对保枪行为与心理战模型分析.pdf" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-xs text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">[PDF]</a>
+                        </div>
                     </div>
-
-                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-200">
-                        <a href="./paper1.pdf" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">
-                            [PDF]
-                        </a>
-                        <a href="https://shitspace.xyz" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-gray-600 hover:bg-[#FF4500] hover:text-white transition-colors duration-300">
-                            [LINK]
-                        </a>
-                    </div>
-                </div>
-
-                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all">
-                    <div class="flex-1 pr-8">
-                        <h3 class="text-base font-semibold text-ink tracking-tight mb-1">基于深度学习的图像特征提取研究</h3>
-                        <p class="text-sm text-gray-500 font-light mt-1">
-                            第一作者. <span class="text-gray-800 font-medium">IEEE TPAMI</span>, 2023.
-                        </p>
-                    </div>
-                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-300">
-                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[PDF]</a>
-                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[DOI]</a>
+                    
+                    <div class="paper-item flex flex-col p-5 rounded-xl border border-gray-200/60 bg-white transition-all shadow-sm">
+                        <h3 class="text-sm md:text-base font-bold text-[#111111] tracking-tight mb-2 leading-snug">
+                            《基于QQ农场互动痕迹推测暗恋对象精力状态的实证研究》
+                        </h3>
+                        <p class="text-xs text-gray-500 font-mono mb-3">SHIT Info Tech, 2026.</p>
+                        <div class="flex space-x-3">
+                            <a href="./基于QQ农场互动痕迹推测暗恋对象精力状态以缓解无意识内耗的实证研究.pdf" target="_blank" class="px-3 py-1.5 rounded bg-gray-100 text-xs text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">[PDF]</a>
+                        </div>
                     </div>
                 </div>
 
-                 <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all">
-                    <div class="flex-1 pr-8">
-                        <h3 class="text-base font-semibold text-ink tracking-tight mb-1">A New Approach to Computer Vision</h3>
-                        <p class="text-sm text-gray-500 font-light mt-1">
-                            Co-author. <span class="text-gray-800 font-medium">CVPR 2022</span>.
-                        </p>
-                    </div>
-                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-300">
-                        <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[PDF]</a>
+                <a href="/papers" class="mt-8 text-base md:text-lg font-extrabold font-mono tracking-widest text-[#111111] hover:text-[#002FA7] transition-all flex items-center group w-max">
+                    VIEW ALL PAPERS <span class="ml-2 text-2xl transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                </a>
+            </section>
+
+            <section id="thoughts" class="flex flex-col h-full">
+                <div class="flex items-center mb-8 space-x-3">
+                    <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Thoughts</h2>
+                    <div class="h-px flex-1 bg-gray-300"></div>
+                    <div class="text-xs font-mono text-[#FF4500]">03</div>
+                </div>
+
+               <div class="space-y-4 flex-1">
+                    <a href="https://www.xiaohongshu.com/explore/69d5a012000000001a02ed3b?xsec_token=ABfml7phlbjMa50f-w2urwz11SYkLQwbiVzZBbIIFXT0E=&xsec_source=pc_user" target="_blank" class="group block p-5 bg-white border border-gray-200/60 rounded-xl hover:border-[#FF4500] transition-all shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-sm md:text-base font-bold text-[#111111] group-hover:text-[#FF4500] transition-colors leading-snug pr-4">大学生活的“轻松与随便”毁了我</h3>
+                            <span class="text-gray-300 group-hover:text-[#FF4500] text-lg">↗</span>
+                        </div>
+                        <p class="text-xs text-gray-400 font-mono mt-3">2026.04.11 / Xiaohongshu</p>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/explore/69cdb21a00000000230161d2?xsec_token=ABNG_OG1eRDnobAAYIQxHSm8mRqVY4N0JbgSHHJDv89Kc=&xsec_source=pc_user" target="_blank" class="group block p-5 bg-white border border-gray-200/60 rounded-xl hover:border-[#FF4500] transition-all shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-sm md:text-base font-bold text-[#111111] group-hover:text-[#FF4500] transition-colors leading-snug pr-4">浅谈大学水课和硬课</h3>
+                            <span class="text-gray-300 group-hover:text-[#FF4500] text-lg">↗</span>
+                        </div>
+                        <p class="text-xs text-gray-400 font-mono mt-3">2026.04.10 / Xiaohongshu</p>
+                    </a>
+                </div>
+
+                <a href="/thoughts" class="mt-8 text-base md:text-lg font-extrabold font-mono tracking-widest text-[#111111] hover:text-[#002FA7] transition-all flex items-center group w-max">
+                    READ ALL <span class="ml-2 text-2xl transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                </a>
+            </section>
+
+
+            <section id="pictures" class="flex flex-col h-full">
+                <div class="flex items-center mb-8 space-x-3">
+                    <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Pictures</h2>
+                    <div class="h-px flex-1 bg-gray-300"></div>
+                    <div class="text-xs font-mono text-[#FF4500]">04</div>
+                </div>
+
+                <div class="flex-1">
+                    <div class="grid grid-cols-2 gap-4 w-full md:w-[85%]">
+                        <div class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-xl aspect-square cursor-pointer shadow-sm">
+                            <img src="./duck.jpg" alt="大鸭子" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100">
+                            <div class="work-mask absolute inset-0 bg-[#002FA7]/90 p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
+                                <h3 class="text-sm font-bold text-white tracking-tight">霸气鸭子</h3>
+                            </div>
+                        </div>
+                        <div class="block border border-dashed border-gray-300 rounded-xl aspect-square opacity-50 flex items-center justify-center">
+                            <span class="text-xs text-gray-400 font-mono text-center px-2">More pictures<br>brewing...</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all opacity-50">
-                    <div class="flex-1 pr-8">
-                        <h3 class="text-base font-semibold text-[#111111] tracking-tight mb-1">Waiting for next abstract masterpiece...</h3>
-                        <p class="text-sm text-gray-500 font-light mt-1">
-                            Author. <span class="text-gray-800 font-medium">Journal of Cyber-Red-Face</span>, 2027.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <a href="/pictures" class="mt-8 text-base md:text-lg font-extrabold font-mono tracking-widest text-[#111111] hover:text-[#002FA7] transition-all flex items-center group w-max">
+                    VIEW GALLERY <span class="ml-2 text-2xl transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                </a>
+            </section>
 
+            <section id="videos" class="flex flex-col h-full">
+                <div class="flex items-center mb-8 space-x-3">
+                    <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Videos</h2>
+                    <div class="h-px flex-1 bg-gray-300"></div>
+                    <div class="text-xs font-mono text-[#FF4500]">05</div>
+                </div>
+
+                <div class="flex-1">
+                    <a href="https://www.bilibili.com/video/BV1fyDLBNEio/" target="_blank" class="group relative block overflow-hidden rounded-xl border border-gray-200/60 aspect-video w-full md:w-[85%] shadow-sm">
+                        <img src="./karrigan.jpg" alt="致敬古堡" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-lg">
+                                <svg class="w-6 h-6 text-[#FF4500] ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <a href="/videos" class="mt-8 text-base md:text-lg font-extrabold font-mono tracking-widest text-[#111111] hover:text-[#002FA7] transition-all flex items-center group w-max">
+                    WATCH MORE <span class="ml-2 text-2xl transform group-hover:translate-x-2 transition-transform">&rarr;</span>
+                </a>
+            </section>
+
+        </div>
     </main>
 
     <footer class="custom-bg text-gray-500 mt-20 border-t border-gray-300/50">
@@ -214,25 +243,27 @@ import '../styles/global.css';
     </footer>
 
     <script>
-        // 你的动态数据库放在这里（最新的放最前面）
         const moods = [
+            {date:"2026.04.11",
+            content:"好困😩<br>我什么时候能抓到异色🤬"
+
+            },
             {
                 date: "2026.04.10",
                 content: "晚饭吃了太多碳水，晕碳中😴<br>以后我想发什么就发什么😋<br><br>欢迎来到我的私人厕所 💩 🚽<br>Faze up！✋🏻"
             },
             {
                 date: "2026.04.09",
-                content: "今天搞定了专属域名的上线！🚀<br>整个流程行云流水，Vercel 部署太香了。<br>感觉自己已经是个全栈赛博主理人了 😎"
+                content: "😎"
             },
             {
                 date: "2026.04.08",
-                content: "决定开始搭建我的个人主页。<br>Astro + Tailwind CSS 的框架绝配，<br>代码写起来有一种搭积木的快感 🧱"
+                content: "情感需要发泄，创作就像排泄"
             }
         ];
 
         let currentIndex = 0;
         
-        // 获取页面上的元素
         const moodDate = document.getElementById('mood-date');
         const moodContent = document.getElementById('mood-content');
         const moodDot = document.getElementById('mood-dot');
@@ -240,17 +271,14 @@ import '../styles/global.css';
         const btnNext = document.getElementById('btn-next');
 
         function renderMood() {
-            // 添加淡出特效
             moodContent.classList.remove('opacity-100');
             moodContent.classList.add('opacity-0');
             
             setTimeout(() => {
-                // 更新内容
                 const isLatest = currentIndex === 0;
                 moodDate.innerText = moods[currentIndex].date + (isLatest ? " / Live Updates" : " / Archive");
                 moodContent.innerHTML = moods[currentIndex].content;
                 
-                // 呼吸灯逻辑：最新动态是绿色呼吸，历史归档是灰色静止
                 if(isLatest) {
                     moodDot.classList.add('animate-pulse', 'bg-green-400');
                     moodDot.classList.remove('bg-gray-300');
@@ -259,7 +287,6 @@ import '../styles/global.css';
                     moodDot.classList.add('bg-gray-300');
                 }
 
-                // 按钮开关逻辑：到头了就变暗
                 btnPrev.disabled = currentIndex === moods.length - 1;
                 btnNext.disabled = currentIndex === 0;
                 
@@ -268,13 +295,11 @@ import '../styles/global.css';
                 btnNext.style.opacity = btnNext.disabled ? '0.2' : '1';
                 btnNext.style.cursor = btnNext.disabled ? 'not-allowed' : 'pointer';
 
-                // 淡入特效
                 moodContent.classList.remove('opacity-0');
                 moodContent.classList.add('opacity-100');
-            }, 200); // 对应 Tailwind duration-300 的一半时间，视觉更紧凑
+            }, 200); 
         }
 
-        // 监听按钮点击事件（往左点就是更早的一天，即 index 增加）
         btnPrev.addEventListener('click', () => {
             if (currentIndex < moods.length - 1) {
                 currentIndex++;
@@ -282,7 +307,6 @@ import '../styles/global.css';
             }
         });
 
-        // （往右点就是更新的一天，即 index 减小）
         btnNext.addEventListener('click', () => {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -290,9 +314,7 @@ import '../styles/global.css';
             }
         });
 
-        // 网页刚打开时，初始化第一张卡片
         renderMood();
     </script>
-
 </body>
 </html>
