@@ -7,7 +7,7 @@ import '../styles/global.css';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quanzard Studio / Research - Gallery Gray</title>
+    <title>QUANZARD Studio / Research</title>
     <style>
         body { word-spacing: -1px; } 
         /* 强制背景色，防止失效 */
@@ -23,7 +23,7 @@ import '../styles/global.css';
     <nav class="custom-bg sticky top-0 z-50 border-b border-gray-300/50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-lg md:text-xl tracking-tighter hover:text-[#002FA7] transition-colors cursor-pointer">
-                <span class="font-bold">YOUR NAME</span> 
+                <span class="font-bold">QUANZARD</span> 
                 <span class="font-light text-gray-500 ml-1">Studio / Research</span>
             </div>
             
@@ -50,21 +50,29 @@ import '../styles/global.css';
             </div>
 
             <div class="md:col-span-5 lg:col-span-4 lg:col-start-9">
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col h-[220px]">
                     
-                    <div class="absolute -top-3 -left-3 bg-[#FF4500] text-white text-[10px] font-mono px-3 py-1 rounded-sm shadow-sm rotate-[-3deg]">LATEST MOOD</div>
+                    <div class="absolute -top-3 -left-3 bg-[#FF4500] text-white text-[10px] font-mono px-3 py-1 rounded-sm shadow-sm rotate-[-3deg] z-10">LATEST MOOD</div>
                     
-                    <div class="flex items-center space-x-2 mb-3">
-                        <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-                        <span class="text-xs text-gray-400 font-mono">2026.04.10 / Live Updates</span>
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <div id="mood-dot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse transition-colors duration-300"></div>
+                            <span id="mood-date" class="text-xs text-gray-400 font-mono">2026.04.10 / Live Updates</span>
+                        </div>
+                        
+                        <p id="mood-content" class="text-[#111111] text-sm leading-relaxed font-light italic transition-opacity duration-300 opacity-100">
+                            </p>
                     </div>
-                    
-                    <p class="text-[#111111] text-sm leading-relaxed font-light italic">
-                        晚饭吃了太多碳水，晕碳中😴<br>
-                        以后我想发什么就发什么😋<br><br>
-                        欢迎来到我的私人厕所 💩 🚽<br>
-						Faze up！✋🏻
-                    </p>
+
+                    <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
+                        <button id="btn-prev" class="text-gray-400 hover:text-[#FF4500] transition flex items-center space-x-1 text-[11px] font-mono tracking-wider focus:outline-none">
+                            <span>&larr; PREV DAY</span>
+                        </button>
+                        <button id="btn-next" class="text-gray-400 hover:text-[#002FA7] transition flex items-center space-x-1 text-[11px] font-mono tracking-wider focus:outline-none">
+                            <span>NEXT DAY &rarr;</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -82,7 +90,7 @@ import '../styles/global.css';
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm">
-                    <img src="/duck.jpg" alt="霸气大鸭子" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    <img src="./duck.jpg" alt="霸气大鸭子" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
                     
                     <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
                         <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / PET</span>
@@ -91,7 +99,7 @@ import '../styles/global.css';
                 </div>
 <a href="https://www.bilibili.com/video/BV1fyDLBNEio/" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
     
-    <img src="/karrigan.jpg" alt="视频封面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+    <img src="./karrigan.jpg" alt="视频封面" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
     
     <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
         <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / MOTION</span>
@@ -106,9 +114,9 @@ import '../styles/global.css';
         </div>
     </div>
 </a>
-<a href="/paper1.pdf" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
+<a href="./paper1.pdf" target="_blank" class="work-card group relative overflow-hidden bg-white border border-gray-200/60 rounded-lg aspect-[3/4] cursor-pointer shadow-sm block">
     
-    <img src="/cover.jpg" alt="论文封面" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+    <img src="./cover.jpg" alt="论文封面" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
     
     <div class="work-mask absolute inset-0 bg-[#002FA7]/95 p-6 md:p-8 flex flex-col justify-end opacity-0 transition-opacity duration-300 text-left">
         <span class="text-white/70 text-xs font-mono mb-2 border-l-2 border-[#FF4500] pl-2">2026 / RESEARCH</span>
@@ -117,7 +125,7 @@ import '../styles/global.css';
         
         <div class="mt-4 flex items-center text-white/80 text-sm font-light">
             <svg class="w-5 h-5 mr-2 animate-pulse text-[#FF4500]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
             <span>点击阅读 PDF 原文</span>
         </div>
@@ -161,23 +169,6 @@ import '../styles/global.css';
                     </div>
                 </div>
 
-                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all opacity-50">
-                    <div class="flex-1 pr-8">
-                        <h3 class="text-base font-semibold text-[#111111] tracking-tight mb-1">Waiting for next abstract masterpiece...</h3>
-                        <p class="text-sm text-gray-500 font-light mt-1">
-                            Author. <span class="text-gray-800 font-medium">Journal of Cyber-Red-Face</span>, 2027.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-            <div class="flex items-center mb-10 space-x-3">
-                <h2 class="text-xs font-medium tracking-widest text-gray-500 uppercase">Publications</h2>
-                <div class="h-px flex-1 bg-gray-300"></div>
-                <div class="text-xs font-mono text-[#FF4500]">02</div>
-            </div>
-
-            <div class="space-y-2">
                 <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all">
                     <div class="flex-1 pr-8">
                         <h3 class="text-base font-semibold text-ink tracking-tight mb-1">基于深度学习的图像特征提取研究</h3>
@@ -202,6 +193,15 @@ import '../styles/global.css';
                         <a href="#" class="text-gray-500 hover:text-[#002FA7] transition-colors">[PDF]</a>
                     </div>
                 </div>
+
+                <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 rounded-lg border border-transparent transition-all opacity-50">
+                    <div class="flex-1 pr-8">
+                        <h3 class="text-base font-semibold text-[#111111] tracking-tight mb-1">Waiting for next abstract masterpiece...</h3>
+                        <p class="text-sm text-gray-500 font-light mt-1">
+                            Author. <span class="text-gray-800 font-medium">Journal of Cyber-Red-Face</span>, 2027.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -209,9 +209,90 @@ import '../styles/global.css';
 
     <footer class="custom-bg text-gray-500 mt-20 border-t border-gray-300/50">
         <div class="max-w-[1600px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest">
-            &copy; 2026 YOUR NAME. BUILT WITH AI & AFFECTION.
+            &copy; 2026 QUANZARD. BUILT WITH AI & AFFECTION.
         </div>
     </footer>
+
+    <script>
+        // 你的动态数据库放在这里（最新的放最前面）
+        const moods = [
+            {
+                date: "2026.04.10",
+                content: "晚饭吃了太多碳水，晕碳中😴<br>以后我想发什么就发什么😋<br><br>欢迎来到我的私人厕所 💩 🚽<br>Faze up！✋🏻"
+            },
+            {
+                date: "2026.04.09",
+                content: "今天搞定了专属域名的上线！🚀<br>整个流程行云流水，Vercel 部署太香了。<br>感觉自己已经是个全栈赛博主理人了 😎"
+            },
+            {
+                date: "2026.04.08",
+                content: "决定开始搭建我的个人主页。<br>Astro + Tailwind CSS 的框架绝配，<br>代码写起来有一种搭积木的快感 🧱"
+            }
+        ];
+
+        let currentIndex = 0;
+        
+        // 获取页面上的元素
+        const moodDate = document.getElementById('mood-date');
+        const moodContent = document.getElementById('mood-content');
+        const moodDot = document.getElementById('mood-dot');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        function renderMood() {
+            // 添加淡出特效
+            moodContent.classList.remove('opacity-100');
+            moodContent.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                // 更新内容
+                const isLatest = currentIndex === 0;
+                moodDate.innerText = moods[currentIndex].date + (isLatest ? " / Live Updates" : " / Archive");
+                moodContent.innerHTML = moods[currentIndex].content;
+                
+                // 呼吸灯逻辑：最新动态是绿色呼吸，历史归档是灰色静止
+                if(isLatest) {
+                    moodDot.classList.add('animate-pulse', 'bg-green-400');
+                    moodDot.classList.remove('bg-gray-300');
+                } else {
+                    moodDot.classList.remove('animate-pulse', 'bg-green-400');
+                    moodDot.classList.add('bg-gray-300');
+                }
+
+                // 按钮开关逻辑：到头了就变暗
+                btnPrev.disabled = currentIndex === moods.length - 1;
+                btnNext.disabled = currentIndex === 0;
+                
+                btnPrev.style.opacity = btnPrev.disabled ? '0.2' : '1';
+                btnPrev.style.cursor = btnPrev.disabled ? 'not-allowed' : 'pointer';
+                btnNext.style.opacity = btnNext.disabled ? '0.2' : '1';
+                btnNext.style.cursor = btnNext.disabled ? 'not-allowed' : 'pointer';
+
+                // 淡入特效
+                moodContent.classList.remove('opacity-0');
+                moodContent.classList.add('opacity-100');
+            }, 200); // 对应 Tailwind duration-300 的一半时间，视觉更紧凑
+        }
+
+        // 监听按钮点击事件（往左点就是更早的一天，即 index 增加）
+        btnPrev.addEventListener('click', () => {
+            if (currentIndex < moods.length - 1) {
+                currentIndex++;
+                renderMood();
+            }
+        });
+
+        // （往右点就是更新的一天，即 index 减小）
+        btnNext.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderMood();
+            }
+        });
+
+        // 网页刚打开时，初始化第一张卡片
+        renderMood();
+    </script>
 
 </body>
 </html>
