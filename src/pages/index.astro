@@ -74,16 +74,28 @@ import '../styles/global.css';
             </div>
 
             <div class="md:col-span-5 lg:col-span-4 lg:col-start-9">
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col h-[220px]">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/60 relative transform transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col min-h-[260px]">
                     <div class="absolute -top-3 -left-3 bg-[#FF4500] text-white text-[10px] font-mono px-3 py-1 rounded-sm shadow-sm rotate-[-3deg] z-10">LATEST MOOD</div>
-                    <div class="flex-1">
+                    
+                    <div class="flex-1 mb-4">
                         <div class="flex items-center space-x-2 mb-3">
                             <div id="mood-dot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse transition-colors duration-300"></div>
                             <span id="mood-date" class="text-xs text-gray-400 font-mono">2026.04.10 / Live Updates</span>
                         </div>
                         <p id="mood-content" class="text-[#111111] text-sm leading-relaxed font-light italic transition-opacity duration-300 opacity-100"></p>
                     </div>
-                    <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-200">
+
+                    <div class="mt-auto mb-5">
+                        <a href="https://www.xiaohongshu.com/explore/69e33599000000001f002aff?xsec_token=AByc9zK8xWszb_VHa3FCOZyPmzISzHpS-Ztq2rxDraKeI=&xsec_source=pc_user" target="_blank" class="group flex items-center justify-between p-3 bg-gray-50 border border-gray-100 rounded-xl hover:border-[#002FA7]/30 hover:bg-[#002FA7]/5 transition-all">
+                            <div class="flex items-center space-x-3 overflow-hidden">
+                                <span class="shrink-0 text-[10px] font-mono font-bold text-white bg-[#002FA7] px-2 py-0.5 rounded-sm">NEW</span>
+                                <span class="text-xs text-[#111111] font-medium truncate">考研机构的“卧底”经历 - Thought<br>26/4/18</span>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-[#002FA7] transition-colors text-sm ml-2">↗</span>
+                        </a>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-200">
                         <button id="btn-prev" class="text-[#111111] hover:text-[#FF4500] transition flex items-center space-x-1 text-sm font-bold font-mono tracking-widest focus:outline-none group">
                             <span class="text-lg transform group-hover:-translate-x-1 transition-transform">&larr;</span> <span>PREV DAY</span>
                         </button>
@@ -268,6 +280,14 @@ import '../styles/global.css';
 
     <script>
         const moods = [ 
+             {
+                date: "2026.04.18",
+                content: "走心的创作之后，需要很长一段时间去恢复💤<br>我只花了一下午😋"
+            },
+            {
+                date: "2026.04.17",
+                content: "如果你觉得一个人快坚持不下去了🤦‍<br>去看看夜晚的操场吧，九点钟熄灯了还有一群人在跑🏃‍<br>“光芒熄灭了，☀但我们还在战斗！”"
+            },
             {
                 date: "2026.04.16",
                 content: "风暴正在聚集🌪<br>新的田野调查🔍正在酝酿"
