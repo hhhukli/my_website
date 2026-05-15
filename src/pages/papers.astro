@@ -1,9 +1,8 @@
 ---
 import '../styles/global.css';
 
-// 🚨 你的“赛博论文数据库” 🚨
-// 以后发新论文，只需要在最前面复制粘贴加一块这个括号就行，下面的 HTML 完全不用动！
-const papers = [
+// 🚨 搞笑模式论文库（SHIT）🚨
+const papersShit = [
     {
         title: "《基于“尼尼孩孩没这冠军”现象的多模态多场景分析溯源》：Falcons战队随机波函数坍塌与电竞玄学研究",
         author: "Nikola Kovač, Ilya Osipov, Quanzard 等.",
@@ -18,7 +17,7 @@ const papers = [
         journal: "SHIT Information Technology, 2026.",
         keywords: "Jame Time, 保枪阈值",
         pdfLink: "./基于“上帝经济学”（Jame Time）的CS战术资源最优解：极低期望残局中的绝对保枪行为与心理战模型分析.pdf",
-        extraLink: "" // 如果没有额外链接就留空
+        extraLink: ""
     },
     {
         title: "《基于QQ农场互动痕迹推测暗恋对象精力状态以缓解无意识内耗的实证研究》",
@@ -45,6 +44,18 @@ const papers = [
         extraLink: ""
     }
 ];
+
+// 正经模式：经典公开论文（PDF 指向 arXiv 官方直链，便于点击验证）
+const papersWork = [
+    {
+        title: "《天然气管道钢管订购与运输优化模型》",
+        author: "Quanzard.",
+        journal: "NJUPT, 2026.",
+        keywords: "数学建模, 线性规划, 运输优化",
+        pdfLink: "/天然气管道钢管订购与运输优化模型.pdf",
+        extraLink: ""
+    }
+];
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -67,35 +78,104 @@ const papers = [
     </nav>
 
     <header class="pt-10 pb-16 max-w-[1000px] mx-auto px-6">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-[#111111]">
-            ALL <span class="text-[#002FA7]">PAPERS.</span>
-        </h1>
-        <p class="mt-4 text-gray-500 font-light max-w-xl">
-            严谨的学术探索与赛博行为艺术的终极碰撞。点击 [PDF] 获取原汁原味的学术缝合大作。
-        </p>
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div class="min-w-0 flex-1">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-[#111111]">
+                    ALL <span class="text-[#002FA7]">PAPERS.</span>
+                </h1>
+                <p class="mt-4 text-gray-500 font-light max-w-xl">
+                    严谨的学术探索与赛博行为艺术的终极碰撞。点击 [PDF] 获取原汁原味的学术缝合大作。
+                </p>
+            </div>
+            <button
+                type="button"
+                id="papers-mode-toggle"
+                class="shrink-0 self-start sm:mt-2 px-5 py-2.5 rounded-lg border-2 border-[#111111] bg-white text-xs font-mono font-bold tracking-[0.2em] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors duration-300 shadow-sm"
+                aria-pressed="true"
+                aria-label="切换论文列表模式"
+            >
+                SHIT
+            </button>
+        </div>
     </header>
 
-    <main class="max-w-[1000px] mx-auto px-6 pb-24 space-y-4">
-        
-        {papers.map((paper) => (
-            <div class="paper-item flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 rounded-xl border border-gray-200/50 bg-white transition-all shadow-sm">
-                <div class="flex-1 pr-4">
-                    <h3 class="text-lg md:text-xl font-bold text-[#111111] tracking-tight mb-2 leading-snug">
-                        {paper.title}
-                    </h3>
-                    <p class="text-sm text-gray-600 font-light mb-1">{paper.author}</p>
-                    <p class="text-xs text-gray-400 font-mono italic">{paper.journal} Keywords: {paper.keywords}</p>
-                </div>
-                <div class="flex items-center space-x-4 mt-6 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-200">
-                    <a href={paper.pdfLink} target="_blank" class="px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300">[PDF]</a>
-                    {paper.extraLink && (
-                        <a href={paper.extraLink} target="_blank" class="px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#FF4500] hover:text-white transition-colors duration-300">[LINK]</a>
-                    )}
-                </div>
-            </div>
-        ))}
+    <main class="max-w-[1000px] mx-auto px-6 pb-24 space-y-4" id="paper-list"></main>
 
-    </main>
+    <script define:vars={{ papersShit, papersWork }}>
+        /** @type {'shit' | 'work'} */
+        let mode = "shit";
+
+        const listEl = document.getElementById("paper-list");
+        const toggleEl = document.getElementById("papers-mode-toggle");
+
+        function renderPapers(papers) {
+            listEl.replaceChildren();
+            for (const paper of papers) {
+                const card = document.createElement("div");
+                card.className =
+                    "paper-item flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 rounded-xl border border-gray-200/50 bg-white transition-all shadow-sm";
+
+                const left = document.createElement("div");
+                left.className = "flex-1 pr-4";
+
+                const h3 = document.createElement("h3");
+                h3.className =
+                    "text-lg md:text-xl font-bold text-[#111111] tracking-tight mb-2 leading-snug";
+                h3.textContent = paper.title;
+
+                const authorP = document.createElement("p");
+                authorP.className = "text-sm text-gray-600 font-light mb-1";
+                authorP.textContent = paper.author;
+
+                const metaP = document.createElement("p");
+                metaP.className = "text-xs text-gray-400 font-mono italic";
+                metaP.textContent = `${paper.journal} Keywords: ${paper.keywords}`;
+
+                left.append(h3, authorP, metaP);
+
+                const actions = document.createElement("div");
+                actions.className =
+                    "flex items-center space-x-4 mt-6 md:mt-0 text-sm font-mono border-l md:border-none pl-4 md:pl-0 border-gray-200";
+
+                const pdfA = document.createElement("a");
+                pdfA.href = paper.pdfLink;
+                pdfA.target = "_blank";
+                pdfA.rel = "noopener noreferrer";
+                pdfA.className =
+                    "px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#002FA7] hover:text-white transition-colors duration-300";
+                pdfA.textContent = "[PDF]";
+                actions.appendChild(pdfA);
+
+                if (paper.extraLink) {
+                    const linkA = document.createElement("a");
+                    linkA.href = paper.extraLink;
+                    linkA.target = "_blank";
+                    linkA.rel = "noopener noreferrer";
+                    linkA.className =
+                        "px-4 py-2 rounded bg-gray-100 text-gray-600 hover:bg-[#FF4500] hover:text-white transition-colors duration-300";
+                    linkA.textContent = "[LINK]";
+                    actions.appendChild(linkA);
+                }
+
+                card.append(left, actions);
+                listEl.appendChild(card);
+            }
+        }
+
+        function sync() {
+            const papers = mode === "shit" ? papersShit : papersWork;
+            renderPapers(papers);
+            toggleEl.textContent = mode === "shit" ? "SHIT" : "WORK";
+            toggleEl.setAttribute("aria-pressed", mode === "shit" ? "true" : "false");
+        }
+
+        toggleEl.addEventListener("click", () => {
+            mode = mode === "shit" ? "work" : "shit";
+            sync();
+        });
+
+        sync();
+    </script>
 
     <footer class="border-t border-gray-300/50">
         <div class="max-w-[1000px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest text-gray-500">

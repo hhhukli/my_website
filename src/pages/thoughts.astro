@@ -1,14 +1,18 @@
 ---
 import '../styles/global.css';
+import { thoughtsCollectionToc } from '../data/thoughtsCollectionToc';
 
 // 🚨 你的“小红书随笔数据库” 🚨
-// 以后发了新帖子，直接在这里复制加上 { title: "...", date: "...", link: "..." } 就行！
+// 以后发了新帖子，在 thoughtsAll 里追加 { title, date, link } 即可。
+// 节选：默认展示前 EXCERPT_COUNT 条；合辑：展示全部。若要「合辑」改为小红书合集链接，可把 thoughtsCollection 改成独立数组。
 //{
 //        title: "",
 //        date: "2026.04.18 / Xiaohongshu",
 //        link: ""
 //    },
-const thoughts = [
+const EXCERPT_COUNT = 5;
+
+const thoughtsAll = [
     {
         title: "像训练AI模型一样训练自己，Attention is all my power",
         date: "2026.04.30 / Xiaohongshu",
@@ -50,6 +54,8 @@ const thoughts = [
         link: "https://www.xiaohongshu.com/explore/69b9ea80000000001f001dc8?xsec_token=ABhuvVN7xXveC-Ghi8Vsj2ckE7DllgR0i-5vT8vhTz3EE=&xsec_source=pc_user"
     }
 ];
+
+const thoughtsExcerpt = thoughtsAll.slice(0, EXCERPT_COUNT);
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -57,8 +63,14 @@ const thoughts = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thoughts - QUANZARD Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         .custom-bg { background-color: #EAEAEA !important; }
+        .collection-shell .font-serif,
+        .collection-reader .font-serif { font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif; }
+        .collection-html-block table { border-collapse: collapse; }
     </style>
 </head>
 <body class="custom-bg text-[#111111] antialiased md:text-sm">
@@ -71,25 +83,242 @@ const thoughts = [
     </nav>
 
     <header class="pt-10 pb-16 max-w-[1000px] mx-auto px-6">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-[#111111]">
-            ALL <span class="text-[#002FA7]">THOUGHTS.</span>
-        </h1>
-        <p class="mt-4 text-gray-500 font-light max-w-xl">
-            这里记录了我的所有碎碎念、设计复盘和突发奇想。点击卡片跳转至小红书。
-        </p>
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div class="min-w-0 flex-1">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-[#111111]">
+                    ALL <span class="text-[#002FA7]">THOUGHTS.</span>
+                </h1>
+                <p id="thoughts-sub" class="mt-4 text-gray-500 font-light max-w-xl">
+                    这里记录了我的所有碎碎念、设计复盘和突发奇想。点击卡片跳转至小红书。
+                </p>
+            </div>
+            <button
+                type="button"
+                id="thoughts-mode-toggle"
+                class="shrink-0 self-start sm:mt-2 px-5 py-2.5 rounded-lg border-2 border-[#111111] bg-white text-xs font-mono font-bold tracking-[0.15em] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors duration-300 shadow-sm"
+                aria-pressed="true"
+                aria-label="切换节选或合辑"
+            >
+                节选
+            </button>
+        </div>
     </header>
 
-    <main class="max-w-[1000px] mx-auto px-6 pb-24 space-y-4">
-        {thoughts.map((thought) => (
-            <a href={thought.link} target="_blank" class="group block p-6 md:p-8 bg-white border border-gray-200/60 rounded-xl hover:border-[#FF4500] hover:shadow-[0_8px_30px_rgb(255,69,0,0.1)] transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between">
-                <div class="flex-1 pr-4">
-                    <h3 class="text-lg md:text-xl font-bold text-[#111111] group-hover:text-[#FF4500] transition-colors leading-snug">{thought.title}</h3>
-                    <p class="text-xs text-gray-400 font-mono mt-3 md:mt-4 border-l-2 border-[#FF4500] pl-2">{thought.date}</p>
-                </div>
-                <span class="hidden md:block text-gray-300 group-hover:text-[#FF4500] text-2xl transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">↗</span>
-            </a>
-        ))}
-    </main>
+    <main class="max-w-[1000px] mx-auto px-6 pb-24 space-y-4" id="thought-list"></main>
+
+    <script define:vars={{ thoughtsExcerpt, thoughtsCollectionToc }}>
+        /** @type {'excerpt' | 'collection'} */
+        let mode = "excerpt";
+        /** @type {'toc' | 'article'} */
+        let collectionView = "toc";
+        /** @type {string | null} */
+        let collectionArticleId = null;
+
+        const articleCache = new Map();
+
+        const listEl = document.getElementById("thought-list");
+        const toggleEl = document.getElementById("thoughts-mode-toggle");
+        const subEl = document.getElementById("thoughts-sub");
+
+        function setSubtitle() {
+            if (!subEl) return;
+            subEl.textContent =
+                mode === "collection"
+                    ? "节选为小红书画像卡片；合辑为长篇随笔目录与站内全文，点标题进入正文。"
+                    : "这里记录了我的所有碎碎念、设计复盘和突发奇想。点击卡片跳转至小红书。";
+        }
+
+        function setListLayout() {
+            listEl.className =
+                "max-w-[1000px] mx-auto px-6 pb-24 " + (mode === "excerpt" ? "space-y-4" : "");
+        }
+
+        function renderThoughts(items) {
+            listEl.replaceChildren();
+            for (const thought of items) {
+                const a = document.createElement("a");
+                a.href = thought.link;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.className =
+                    "group block p-6 md:p-8 bg-white border border-gray-200/60 rounded-xl hover:border-[#FF4500] hover:shadow-[0_8px_30px_rgb(255,69,0,0.1)] transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between";
+
+                const left = document.createElement("div");
+                left.className = "flex-1 pr-4";
+
+                const h3 = document.createElement("h3");
+                h3.className =
+                    "text-lg md:text-xl font-bold text-[#111111] group-hover:text-[#FF4500] transition-colors leading-snug";
+                h3.textContent = thought.title;
+
+                const meta = document.createElement("p");
+                meta.className =
+                    "text-xs text-gray-400 font-mono mt-3 md:mt-4 border-l-2 border-[#FF4500] pl-2";
+                meta.textContent = thought.date;
+
+                left.append(h3, meta);
+
+                const arrow = document.createElement("span");
+                arrow.className =
+                    "hidden md:block text-gray-300 group-hover:text-[#FF4500] text-2xl transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-all";
+                arrow.textContent = "↗";
+
+                a.append(left, arrow);
+                listEl.appendChild(a);
+            }
+        }
+
+        function renderCollectionToc() {
+            listEl.replaceChildren();
+            const wrap = document.createElement("div");
+            wrap.className = "collection-shell mx-auto max-w-[760px]";
+
+            const tocTitle = document.createElement("h2");
+            tocTitle.className =
+                "font-serif text-center text-xl font-bold tracking-[0.12em] text-[#002FA7] md:text-2xl md:tracking-[0.18em]";
+            tocTitle.textContent = "INTRODUCTION / 目录";
+            wrap.appendChild(tocTitle);
+
+            for (const section of thoughtsCollectionToc) {
+                const h3 = document.createElement("h3");
+                h3.className =
+                    "font-serif mt-10 border-b border-[#002FA7]/25 pb-2 text-lg font-bold text-[#002FA7] md:text-xl first:mt-8";
+                h3.textContent = section.category;
+                wrap.appendChild(h3);
+
+                const ul = document.createElement("ul");
+                ul.className = "mt-3 space-y-0 overflow-hidden rounded-xl border border-gray-200/70 bg-white shadow-sm";
+
+                for (const item of section.items) {
+                    const li = document.createElement("li");
+                    li.className =
+                        "flex items-baseline justify-between gap-4 border-b border-gray-100 px-4 py-3.5 last:border-b-0 md:px-6 md:py-4";
+
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className =
+                        "min-w-0 flex-1 text-left font-serif text-[15px] leading-relaxed text-[#111111] transition-colors hover:text-[#002FA7] md:text-base";
+                    btn.textContent = item.title;
+                    btn.addEventListener("click", () => openArticle(item.id));
+
+                    const roman = document.createElement("span");
+                    roman.className =
+                        "shrink-0 font-mono text-sm font-semibold tabular-nums text-[#002FA7] md:text-base";
+                    roman.textContent = item.roman;
+
+                    li.append(btn, roman);
+                    ul.appendChild(li);
+                }
+                wrap.appendChild(ul);
+            }
+
+            listEl.appendChild(wrap);
+        }
+
+        function renderArticleContent(data) {
+            listEl.replaceChildren();
+            const article = document.createElement("article");
+            article.className =
+                "collection-reader mx-auto max-w-[760px] rounded-xl border border-gray-200/60 bg-white p-6 shadow-sm md:p-12";
+
+            const back = document.createElement("button");
+            back.type = "button";
+            back.className =
+                "mb-8 inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#002FA7] transition-colors hover:text-[#FF4500]";
+            back.textContent = "← 返回目录";
+            back.addEventListener("click", () => {
+                collectionView = "toc";
+                collectionArticleId = null;
+                renderCollectionToc();
+            });
+
+            const h1 = document.createElement("h1");
+            h1.className =
+                "font-serif border-b border-[#002FA7]/20 pb-6 text-2xl font-bold leading-snug text-[#111111] md:text-3xl";
+            h1.textContent = data.title;
+
+            article.append(back, h1);
+
+            for (const block of data.blocks) {
+                if (block.type === "p") {
+                    const p = document.createElement("p");
+                    p.className =
+                        "font-serif mb-6 text-[15px] leading-[1.92] text-justify text-gray-800 md:text-[17px]";
+                    p.textContent = block.text;
+                    article.appendChild(p);
+                } else if (block.type === "html") {
+                    const div = document.createElement("div");
+                    div.className = "collection-html-block mb-8";
+                    div.innerHTML = block.html;
+                    article.appendChild(div);
+                }
+            }
+
+            listEl.appendChild(article);
+        }
+
+        async function openArticle(id) {
+            collectionView = "article";
+            collectionArticleId = id;
+            listEl.replaceChildren();
+            const loading = document.createElement("div");
+            loading.className =
+                "collection-reader mx-auto max-w-[760px] rounded-xl border border-dashed border-gray-300 bg-white/80 p-10 text-center font-mono text-sm text-gray-400";
+            loading.textContent = "加载正文…";
+            listEl.appendChild(loading);
+
+            try {
+                let data = articleCache.get(id);
+                if (!data) {
+                    const res = await fetch(`/thoughts-collection/${id}.json`);
+                    if (!res.ok) throw new Error(String(res.status));
+                    data = await res.json();
+                    articleCache.set(id, data);
+                }
+                renderArticleContent(data);
+            } catch {
+                listEl.replaceChildren();
+                const err = document.createElement("div");
+                err.className = "rounded-xl border border-red-200 bg-red-50/80 p-6 text-sm text-red-800";
+                err.textContent =
+                    "正文加载失败。请在项目根目录运行 npm run pack:thoughts 生成 public/thoughts-collection/*.json 后重新构建或刷新。";
+                listEl.appendChild(err);
+            }
+        }
+
+        function sync() {
+            setSubtitle();
+            setListLayout();
+            if (mode === "excerpt") {
+                collectionView = "toc";
+                collectionArticleId = null;
+                renderThoughts(thoughtsExcerpt);
+            } else if (collectionView === "toc") {
+                renderCollectionToc();
+            } else if (collectionArticleId) {
+                const cached = articleCache.get(collectionArticleId);
+                if (cached) renderArticleContent(cached);
+                else openArticle(collectionArticleId);
+            }
+            toggleEl.textContent = mode === "excerpt" ? "节选" : "合辑";
+            toggleEl.setAttribute("aria-pressed", mode === "excerpt" ? "true" : "false");
+        }
+
+        toggleEl.addEventListener("click", () => {
+            if (mode === "excerpt") {
+                mode = "collection";
+                collectionView = "toc";
+                collectionArticleId = null;
+            } else {
+                mode = "excerpt";
+                collectionView = "toc";
+                collectionArticleId = null;
+            }
+            sync();
+        });
+
+        sync();
+    </script>
 
     <footer class="border-t border-gray-300/50">
         <div class="max-w-[1000px] mx-auto px-6 py-12 text-center text-xs font-mono tracking-widest text-gray-500">
