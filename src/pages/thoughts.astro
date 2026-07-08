@@ -201,12 +201,18 @@ const thoughtsExcerpt = thoughtsAll.slice(0, EXCERPT_COUNT);
                     btn.textContent = item.title;
                     btn.addEventListener("click", () => openArticle(item.id));
 
+                    const date = document.createElement("time");
+                    date.className =
+                        "shrink-0 font-mono text-xs tabular-nums text-gray-400 md:text-sm";
+                    date.dateTime = item.date.replaceAll(".", "-");
+                    date.textContent = item.date;
+
                     const roman = document.createElement("span");
                     roman.className =
                         "shrink-0 font-mono text-sm font-semibold tabular-nums text-[#002FA7] md:text-base";
                     roman.textContent = item.roman;
 
-                    li.append(btn, roman);
+                    li.append(btn, date, roman);
                     ul.appendChild(li);
                 }
                 wrap.appendChild(ul);

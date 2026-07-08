@@ -14,6 +14,9 @@ const rawDir = path.join(root, "src", "content", "collection-raw");
 const outDir = path.join(root, "public", "thoughts-collection");
 
 const titles = {
+	youji: "我的优绩主义死在了初升高的那个夏天",
+	baoli: "大学课堂上老师一直在被冷暴力",
+	lezi: "高中乐子三则",
 	jingbang: "金榜未题名之后，大学生出路分化之谜",
 	wodi: "我在考研机构的“卧底经历”",
 	laoshi: "我的大学的老师们",
@@ -22,6 +25,10 @@ const titles = {
 	zhinan: "AI时代，是对人的主体性的回归，君子不器",
 	AImoxing: "像训练AI模型一样训练自己 Attention is all my power",
 	xuanwu: "玄武门",
+	kugu: "枯骨与悲鸣",
+	zasui: "杂碎",
+	amo: "《给阿麽的情书》不像是在看一部电影",
+	zuohao: "坐好",
 };
 
 /** zhinan：在原文中插入 HTML 表格块（占位符行） */
@@ -49,13 +56,17 @@ function readRaw(id) {
 	if (fs.existsSync(mergedPath)) {
 		return fs.readFileSync(mergedPath, "utf8");
 	}
+	const exactPath = path.join(rawDir, `${id}.txt`);
+	if (fs.existsSync(exactPath)) {
+		return fs.readFileSync(exactPath, "utf8");
+	}
 	const parts = [];
 	for (let i = 0; i < 20; i++) {
 		const p = path.join(rawDir, `${id}-part${i}.txt`);
 		if (fs.existsSync(p)) parts.push(fs.readFileSync(p, "utf8"));
 	}
 	if (parts.length) return parts.join("\n\n");
-	return fs.readFileSync(path.join(rawDir, `${id}.txt`), "utf8");
+	throw new Error(`Missing article source: ${id}`);
 }
 
 function toParagraphBlocks(text) {
